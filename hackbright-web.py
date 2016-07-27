@@ -54,8 +54,26 @@ def project():
     project_info = hackbright.get_project_by_title(title)
     grade_info = hackbright.get_grades_by_title(title) 
 
-
     return render_template('project_info.html', project_info=project_info, grade_info=grade_info)
+
+@app.route('/project_add')
+def project_add():
+    """Add a new project"""
+
+    return render_template('project_add.html')
+
+
+@app.route('/project_add_confirmation', methods=['POST'])
+def project_add_confirmation():
+    """Prints confirmation that project has been added"""
+
+    title = request.form.get('title')
+    description = request.form.get('description')
+    max_grade = request.form.get('max_grade')
+    hackbright.make_new_project(title, description, max_grade)
+
+    return render_template('project_add_confirmation.html', title=title, description=description, max_grade=max_grade)
+
 
 if __name__ == "__main__":
     hackbright.connect_to_db(app)

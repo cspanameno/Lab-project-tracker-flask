@@ -5,10 +5,36 @@
 </head>
 <body>
     <h1>List of Students</h1>
-{{ student_list }}
+<table>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Github</th>
+    </tr>
+{% for row in student_list %}
+    <tr>
+        <td> {{ row[0] }}</td>
+        <td> {{ row[1] }}</td>
+        <td> <a href = "/student?github={{ row[2] }}">{{ row[2] }}</a></td>
+    </tr>
+{% endfor %}
+</table>
 
     <h1>List of Projects</h1>
-{{ project_list }}
+<table>
+    <tr>
+        <th>Projectname</th>
+        <th>Description</th>
+        <th>Max Grade</th>
+    </tr>
+{% for row in project_list %}
+    <tr>
+        <td> <a href = "/project?title={{ row[0] }}">{{ row[0] }}</a></td>
+        <td> {{ row[1] }}</td>
+        <td> {{ row[2] }}</td>
+    </tr>
+{% endfor %}
+</table>
 
 </body>
 </html>
